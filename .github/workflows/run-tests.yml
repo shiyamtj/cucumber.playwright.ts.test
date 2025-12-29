@@ -25,10 +25,10 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Install Playwright browsers
-        run: yarn playwright install
+        run: yarn playwright install --with-deps
 
       - name: Run tests
-        run: yarn test
+        run: yarn test:chromium
 
       - name: Upload test reports
         if: always()

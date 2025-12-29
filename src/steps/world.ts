@@ -45,6 +45,11 @@ export class CustomWorld extends World {
     }
 
     const version = this.browser.version()
+    console.log('Browser Type:', browserType)
+    console.log('Browser Version:', version)
+    console.log('Headless Mode:', headless)
+    console.log('Viewport:', viewportName)
+
     const reportDir = path.join(__dirname, '..', '..', 'reports')
     fs.ensureDirSync(reportDir)
     fs.writeFileSync(

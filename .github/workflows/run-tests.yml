@@ -28,7 +28,7 @@ jobs:
         run: yarn playwright install --with-deps
 
       - name: Run tests
-        run: yarn test:chromium
+        run: yarn test
 
       - name: Upload test reports
         if: always()

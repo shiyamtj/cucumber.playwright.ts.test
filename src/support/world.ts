@@ -27,6 +27,7 @@ export class CustomWorld extends World {
   }
 
   async launchBrowser() {
+    logger.separator()
     const browserType = process.env.BROWSER || 'chromium'
     const headless = process.env.HEADLESS === 'true'
     const viewportName = (process.env.VIEWPORT ||
@@ -68,6 +69,7 @@ export class CustomWorld extends World {
     await this.page?.close()
     await this.context?.close()
     await this.browser?.close()
+    logger.separator()
   }
 }
 

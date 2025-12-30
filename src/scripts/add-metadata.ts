@@ -1,6 +1,9 @@
-const fs = require('fs-extra')
-const path = require('path')
+import fs from 'fs-extra'
+import path from 'path'
+import { logger } from '../support/logger'
 
+logger.separator(80)
+console.log('Adding metadata to Cucumber JSON reports...')
 const reportsDir = path.join(__dirname, '..', '..', 'reports')
 console.log('Files in report directory:', fs.readdirSync(reportsDir))
 
@@ -35,7 +38,7 @@ files.forEach((file) => {
       reportBrowserName = 'chrome'
     }
 
-    report.forEach((feature) => {
+    ;(report as any[]).forEach((feature) => {
       feature.metadata = {
         browser: {
           name: reportBrowserName,

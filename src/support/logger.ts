@@ -24,4 +24,7 @@ export const logger = {
   debug: (...args: any[]) => {
     console.debug(chalk.magenta(`${icons.debug} [DEBUG]`), ...args)
   },
+  separator: (length = 50) => {
+    console.log(chalk.yellowBright('_'.repeat(length)))
+  },
 }

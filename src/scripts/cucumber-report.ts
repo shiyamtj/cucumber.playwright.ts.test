@@ -9,7 +9,7 @@ reporter.generate({
   brandTitle: 'Test Execution Report',
   theme: 'bootstrap',
   jsonDir: 'reports/json/',
-  output: 'reports/cucumber-html/cucumber-report.html',
+  output: 'reports/cucumber-html/index.html',
   reportSuiteAsScenarios: true,
   scenarioTimestamp: true,
   launchReport: false,

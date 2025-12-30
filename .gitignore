@@ -8,6 +8,7 @@
 
 # reports
 /reports/
+/reports-history/
 
 # build output
 /dist

@@ -20,12 +20,30 @@ jobs:
       - name: Run tests
         run: docker run -v "$(pwd)":/app playwright-docker:latest sh -c "yarn install --frozen-lockfile && yarn test"
 
-      - name: Upload test reports
+      - name: Upload test report - multiple-cucumber-html
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-reports-${{ github.run_id }}-${{ github.event_name }}-${{ github.run_number }}-${{ github.sha }}
-          path: reports/
+          name: multiple-cucumber-html-${{ github.run_id }}
+          path: reports/html
+          retention-days: 30
+          compression-level: 9
+
+      - name: Upload test report - cucumber-html
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-html-${{ github.run_id }}
+          path: reports/cucumber-html
+          retention-days: 30
+          compression-level: 9
+
+      - name: Upload test reports for github pages
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-pages-reports-${{ github.run_id }}
+          path: reports-history/
           retention-days: 30
           compression-level: 9
 
@@ -37,10 +55,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Download merged reports
+      - name: Download reports
         uses: actions/download-artifact@v4
         with:
-          name: test-reports-${{ github.run_id }}-${{ github.event_name }}-${{ github.run_number }}-${{ github.sha }}
+          name: github-pages-reports-${{ github.run_id }}
           path: reports/
 
       - name: Publish HTML report to GitHub Pages

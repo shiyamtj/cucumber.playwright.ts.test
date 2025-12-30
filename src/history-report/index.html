@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <title>Playwright Cucumber GitHub</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="bg-dark text-white py-4 mb-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="text-center">Playwright Cucumber Reports Dashboard</h1>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="input-group">
+            <input
+              type="text"
+              id="searchInput"
+              class="form-control"
+              placeholder="Search report..."
+              onkeyup="handleSearch()"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              onclick="handleSearch()"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="list-group mb-4" id="dataList"></div>
+          <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center" id="pagination"></ul>
+          </nav>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

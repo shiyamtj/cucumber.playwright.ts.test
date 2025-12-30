@@ -1,0 +1,51 @@
+name: Run Cucumber Playwright Tests on Docker
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Build docker image
+        run: docker build -t playwright-docker .
+
+      - name: Run tests
+        run: docker run -v "$(pwd)":/app playwright-docker:latest sh -c "yarn install --frozen-lockfile && yarn test"
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-${{ github.run_id }}-${{ github.event_name }}-${{ github.run_number }}-${{ github.sha }}
+          path: reports/
+          retention-days: 30
+          compression-level: 9
+
+  publish-gh-pages:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Download merged reports
+        uses: actions/download-artifact@v4
+        with:
+          name: test-reports-${{ github.run_id }}-${{ github.event_name }}-${{ github.run_number }}-${{ github.sha }}
+          path: reports/
+
+      - name: Publish HTML report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: reports/html
+          publish_branch: gh-pages
